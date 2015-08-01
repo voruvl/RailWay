@@ -16,7 +16,7 @@
 	<a href="orderlist"><locale:message code="trains.allOrders" /></a>
 
 	<center>
-		<h1>Покупка билета на поезд</h1>
+		<h1><locale:message code="order.buyInTrain" /></h1>
 	</center>
 	<br>
 	<p>
@@ -50,17 +50,17 @@
 					href="createorders?trainId=${allListTrain.train.id}
 					&firstStation=${startstation.id}
 					&lastStation=${stopstation.id}
-					&price=${allListTrain.summPrice}">Купить билет</a></td>
+					&price=${allListTrain.summPrice}"> <locale:message code="order.buyTicket" /></a></td>
 			</tr>
 			<table>
 				<thead>
 					<tr>
 						<td></td>
 						<td></td>
-						<td><h5>Станция</h5></td>
-						<td><h5>Цена</h5></td>
-						<td><h5>Время приб.</h5></td>
-						<td><h5>Время отпр.</h5></td>
+						<td><h5><locale:message code="stations.station" /></h5></td>
+						<td><h5><locale:message code="price" /></h5></td>
+						<td><h5><locale:message code="trains.timeStart" /></h5></td>
+						<td><h5><locale:message code="routers.timeStop" /></h5></td>
 					</tr>
 				</thead>
 				<c:forEach items="${allListTrain.listTrainStations}"
