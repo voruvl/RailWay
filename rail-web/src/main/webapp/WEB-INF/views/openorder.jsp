@@ -8,6 +8,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+ 		table, th, td
+{
+border-style:solid;
+border-width:1px;
+border-collapse:collapse;
+padding:2px;
+}
+th
+{
+height:28px;
+background-color:#f892dc;
+color:black;
+border-color:black;
+}
+	.lists  {
+	background: #aacbad
+	}
+	
+
+	.orders  {
+	background: #dddddd
+	}
+
+	.orders tr:hover {
+	background: #aaaaaa
+	}
+	</style>
 </head>
 <body>
 	<a href="trains"><locale:message code="trains.trains" /></a>
@@ -26,19 +54,19 @@
 		
 	</p>
 	<c:forEach items="${allListTrain}" var="allListTrain" varStatus="loop">
-		<table>
-			<thead>
+		<table class="orders">
+			
 				<tr>
-					<td><locale:message code="numer" /></td>
-					<td><locale:message code="trains.numTrain" /></td>
-					<td><locale:message code="trains.startStation" /></td>
-					<td><locale:message code="trains.stopStation" /></td>
-					<td><locale:message code="trains.timeStart" /></td>
-					<td><locale:message code="routers.price" /></td>
+					<th><locale:message code="numer" /></th>
+					<th><locale:message code="trains.numTrain" /></th>
+					<th><locale:message code="trains.startStation" /></th>
+					<th><locale:message code="trains.stopStation" /></th>
+					<th><locale:message code="trains.timeStart" /></th>
+					<th><locale:message code="routers.price" /></th>
 
-					<td></td>
+					
 				</tr>
-			</thead>
+			
 			<tr>
 				<td>${loop.index+1}.</td>
 				<td>${allListTrain.train.numer}</td>
@@ -52,22 +80,19 @@
 					&lastStation=${stopstation.id}
 					&price=${allListTrain.summPrice}"> <locale:message code="order.buyTicket" /></a></td>
 			</tr>
-			<table>
-				<thead>
+			<table class="lists">
+				
 					<tr>
-						<td></td>
-						<td></td>
-						<td><h5><locale:message code="stations.station" /></h5></td>
-						<td><h5><locale:message code="price" /></h5></td>
-						<td><h5><locale:message code="trains.timeStart" /></h5></td>
-						<td><h5><locale:message code="routers.timeStop" /></h5></td>
+						<th><h5><locale:message code="stations.station" /></h5></th>
+						<th><h5><locale:message code="price" /></h5></th>
+						<th><h5><locale:message code="trains.timeStart" /></h5></th>
+						<th><h5><locale:message code="routers.timeStop" /></h5></th>
 					</tr>
-				</thead>
+				
 				<c:forEach items="${allListTrain.listTrainStations}"
 					var="routetrain" varStatus="loop">
 					<tr>
-						<td></td>
-						<td></td>
+						
 						<td>${routetrain.station.nameStation}</td>
 						<td>${routetrain.price}</td>
 						<td>${routetrain.timeArrival}</td>

@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.trains tr:nth-child(odd) {
+	background: #ffffff
+}
+
+.trains tr:nth-child(even) {
+	background: #cacaca
+}
+
+.trains tr:hover {
+	background: #999
+}

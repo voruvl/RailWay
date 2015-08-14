@@ -9,6 +9,25 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Железнодорожные станции</title>
+ <style>
+	table, th, td
+{
+border-style:solid;
+border-width:1px;
+border-collapse:collapse;
+padding:2px;
+}
+th
+{
+height:28px;
+background-color:#f892dc;
+color:black;
+border-color:black;
+}
+.stations tr:nth-child(odd) {background: #ffffff}
+.stations tr:nth-child(even) {background: #ffeffb}
+.stations tr:hover {background: #999}
+  </style>
 </head>
 <body>
 	<a href="trains"><locale:message code="trains.trains" /></a>
@@ -23,14 +42,14 @@
 		<input type="text" name="namestation" placeholder=<locale:message code="stations.nameStation" /> /><br>
 		<input type="submit" value=<locale:message code="insert" /> /><br>
 	</form>
-	<table>
-		<thead>
+	<table class="stations">
+		
 			<tr>
-				<td><locale:message code="numer" /></td>
-				<td><locale:message code="stations.nameStation" /></td>
+				<th><locale:message code="numer" /></th>
+				<th><locale:message code="stations.nameStation" /></th>
 
 			</tr>
-		</thead>
+		
 
 		<c:forEach items="${stList}" var="station" varStatus="loop">
 

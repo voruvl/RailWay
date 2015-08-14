@@ -8,6 +8,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Поезда</title>
+<style>
+	table, th, td
+{
+border-style:solid;
+border-width:1px;
+border-collapse:collapse;
+padding:2px;
+}
+th
+{
+height:28px;
+background-color:#f892dc;
+color:black;
+border-color:black;
+}
+.routers tr:nth-child(odd) {
+	background: #ffffff
+}
+
+.routers tr:nth-child(even) {
+	background: #ffeffb
+}
+
+.routers tr:hover {
+	background: #999
+}
+  </style>
 </head>
 <body>
 	<a href="trains"><locale:message code="trains.trains" /></a>
@@ -23,16 +50,16 @@
 		${train.firstStation}-${train.lastStation} <locale:message code="trains.timeStart" />${train.time}</h3>
 	<br>
 	<p><locale:message code="routes.stops" /></p>
-	<table>
-		<thead>
+	<table class="routers">
+		
 			<tr>
-				<td><locale:message code="numer" /></td>
-				<td><locale:message code="stations.station" /></td>
-				<td><locale:message code="trains.timeStart" /></td>
-				<td><locale:message code="routers.timeStop" /></td>
-				<td><locale:message code="routers.price" /></td>
+				<th><locale:message code="numer" /></th>
+				<th><locale:message code="stations.station" /></th>
+				<th><locale:message code="trains.timeStart" /></th>
+				<th><locale:message code="routers.timeStop" /></th>
+				<th><locale:message code="routers.price" /></th>
 			</tr>
-		</thead>
+		
 		<c:forEach items="${routeStations}" var="stations" varStatus="loop">
 			<tr>
 				<td>${loop.index+1}.</td>
