@@ -9,108 +9,89 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/sunny/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="/css/train.css">
-    <link type="text/css" href="/ui/jqueryui.custom.css" rel="stylesheet" />
- <style>
- 		table, th, td
-{
-border-style:solid;
-border-width:1px;
-border-collapse:collapse;
-padding:2px;
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
+
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+form {
+	max-width: 500px;
+	margin: 0 auto;
+	padding-top: 20px;
 }
-th
-{
-height:28px;
-background-color:#f892dc;
-color:black;
-border-color:black;
+
+form button.small {
+	padding: 8px 17px;
 }
-	.trains tr:nth-child(odd) {
-	background: #ffffff
-	}
 
-	.trains tr:nth-child(even) {
-	background: #dddddd
-	}
+#left {
+	left: 0px;
+	position: absolute;
+}
 
-	.trains tr:hover {
-	background: #aaaaaa
-	}
-
-	label {
-	float:left;
-	}
-	.field {clear:both; 
-	text-align:right;
-	}
-	.main {float:left}
-  </style>
-  <script type="text/javascript">
-
-	$(function() {
-	
-    $('#dialog').dialog({
-		autoOpen: false,
-		modal:true,
-		resizable:false,
-		open: function() {
-					$('.ui-dialog-titlebar-close').bind('click', function() {
-						$('#dialog').dialog('close');
-					})
-				}
-	});
-	
-	$('button').button().click(function(e) {
-        $('#dialog').dialog("open")
-    	});
-			
-	});
-	
-	
-</script>
+#right {
+	left: 400px;
+	position: absolute;
+}
+</style>
 </head>
 <body>
-	<a href="trains"><locale:message code="trains.trains" /></a>
-	<a href="stations"><locale:message code="trains.stations" /></a>
-	<a href="order"><locale:message code="trains.orders" /></a>
-	<a href="orderlist"><locale:message code="trains.allOrders" /></a>
-	
-	
+	<a href="trains" class="btn btn-info btn-xs"><locale:message
+			code="trains.trains" /></a>
+	<a href="stations" class="btn btn-info btn-xs"><locale:message
+			code="trains.stations" /></a>
+	<a href="order" class="btn btn-info btn-xs"><locale:message
+			code="trains.orders" /></a>
+	<a href="orderlist" class="btn btn-info btn-xs"><locale:message
+			code="trains.allOrders" /></a>
 	<center>
-		<h1><locale:message code="order.selectTrain" /></h1>
+		<h1>
+			<locale:message code="trains.dialogorder" />
+		</h1>
 	</center>
 	<br>
+	<div id="left" ng-app="">
+		<form action="openorder" id="dialog"
+			title="<locale:message code="trains.dialogorder"/>">
 
-	<form action="openorder" id="dialog" title="<locale:message code="trains.dialogorder"/>">
-		<div class="main">    
-	    	
-		<locale:message code="order.stationArrival" />
-		<div class="field">
-		<select name="arrivalId" style="height : 23px; width : 163px;">
-			<c:forEach items="${stationArrivalList}" var="stationArrival">
+			<div class="row">
+				<div class="small-5 columns">
+					<label class="right inline"><locale:message
+							code="order.stationArrival" /></label>
+				</div>
+				<div class="small-7 columns">
+					<select name="arrivalId">
+						<c:forEach items="${stationArrivalList}" var="stationArrival">
 
-				<option value="${stationArrival.id}">${stationArrival.nameStation}</option>
-			</c:forEach>
+							<option value="${stationArrival.id}">${stationArrival.nameStation}</option>
+						</c:forEach>
 
-		</select> 
-		</div>
-		 <br><locale:message code="order.stationDeparture" />
-		<div class="field">
-		<select name="departId" style="height : 23px; width : 164px;">
-			<c:forEach items="${stationDepartureList}" var="stationDeparture">
-				<option value="${stationDeparture.id}">${stationDeparture.nameStation}</option>
-			</c:forEach>
-
-		</select>
-		</div>
-		<br> <input type="submit" value=<locale:message code="select" />>
-		</div>
-	</form>
-	<button id="show" type="button"><locale:message code="trains.dialogorder"/></button>
-
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="small-5 columns">
+					<label class="right inline"><locale:message
+							code="order.stationDeparture" /></label>
+				</div>
+				<div class="small-7 columns">
+					<select name="departId">
+						<c:forEach items="${stationDepartureList}" var="stationDeparture">
+							<option value="${stationDeparture.id}">${stationDeparture.nameStation}</option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
+			<button id="show" class="btn btn-success" type="send">
+				<locale:message code="trains.dialogorder" />
+				<span class="glyphicon glyphicon-ok"></span>
+			</button>
+		</form>
+	</div>
 </body>
 </html>

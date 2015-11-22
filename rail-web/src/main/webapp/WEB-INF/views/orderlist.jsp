@@ -6,64 +6,74 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
+
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
- <style>
-	table, th, td
-{
-border-style:solid;
-border-width:1px;
-border-collapse:collapse;
-padding:2px;
+<style>
+form {
+	max-width: 500px;
+	margin: 0 auto;
+	padding-top: 20px;
 }
-th
-{
-height:28px;
-background-color:#f892dc;
-color:black;
-border-color:black;
+
+form button.small {
+	padding: 8px 17px;
 }
-.orders tr:nth-child(odd) {background: #ffffff}
-.orders tr:nth-child(even) {background: #ffeffb}
-.orders tr:hover {background: #999}
-  </style>
+
+#orders {
+	margin: 0 auto;
+}
+</style>
 </head>
 <body>
-	<a href="trains"><locale:message code="trains.trains" /></a>
-	<a href="stations"><locale:message code="trains.stations" /></a>
-	<a href="order"><locale:message code="trains.orders" /></a>
-	<a href="orderlist"><locale:message code="trains.allOrders" /></a>
-	
+	<a href="trains" class="btn btn-info btn-xs"><locale:message
+			code="trains.trains" /></a>
+	<a href="stations" class="btn btn-info btn-xs"><locale:message
+			code="trains.stations" /></a>
+	<a href="order" class="btn btn-info btn-xs"><locale:message
+			code="trains.orders" /></a>
+	<a href="orderlist" class="btn btn-info btn-xs"><locale:message
+			code="trains.allOrders" /></a>
 	<center>
-		<h1><locale:message code="trains.allOrders" /></h1>
+		<h1>
+			<locale:message code="trains.allOrders" />
+		</h1>
 	</center>
 	<br>
 
-	<table class="orders">
-		
+	<table id="orders">
+		<thead>
 			<tr>
 				<th><locale:message code="numer" /></th>
-				<th><locale:message code="trains.numTrain"/></th>
-				<th><locale:message code="trains.startStation"/></th>
-				<th><locale:message code="trains.timeStart"/></th>
-				<th><locale:message code="trains.stopStation"/></th>
-				<th><locale:message code="routers.timeStop"/></th>
-				<th><locale:message code="routers.price"/></th>
-				
+				<th><locale:message code="trains.numTrain" /></th>
+				<th><locale:message code="trains.startStation" /></th>
+				<th><locale:message code="trains.timeStart" /></th>
+				<th><locale:message code="trains.stopStation" /></th>
+				<th><locale:message code="routers.timeStop" /></th>
+				<th><locale:message code="routers.price" /></th>
 			</tr>
-		
-		<c:forEach items="${orders}" var="order" varStatus="loop">
-			<tr>
-				<td>${loop.index+1}.</td>
-				<td>${order.train.firstStation}-${order.train.lastStation}</td>
-				<td>${order.startStation.station.nameStation}</td>
-				<td>${order.startStation.timeDeparture}</td>
-				<td>${order.stopStation.station.nameStation}</td>
-				<td>${order.stopStation.timeArrival}</td>
-				<td>${order.price}</td>
-				
-			</tr>
-		</c:forEach>
+		</thead>
+		<tbody>
+			<c:forEach items="${orders}" var="order" varStatus="loop">
+				<tr>
+					<td>${loop.index+1}.</td>
+					<td>${order.train.firstStation}-${order.train.lastStation}</td>
+					<td>${order.startStation.station.nameStation}</td>
+					<td>${order.startStation.timeArrival}</td>
+					<td>${order.stopStation.station.nameStation}</td>
+					<td>${order.stopStation.timeDeparture}</td>
+					<td>${order.price}</td>
+
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 </body>
 </html>

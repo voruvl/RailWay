@@ -8,86 +8,160 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Поезда</title>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
+
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
 <style>
-	table, th, td
-{
-border-style:solid;
-border-width:1px;
-border-collapse:collapse;
-padding:2px;
-}
-th
-{
-height:28px;
-background-color:#f892dc;
-color:black;
-border-color:black;
-}
-.routers tr:nth-child(odd) {
-	background: #ffffff
+form {
+	max-width: 500px;
+	margin: 0 auto;
+	padding-top: 20px;
 }
 
-.routers tr:nth-child(even) {
-	background: #ffeffb
+form button.small {
+	padding: 8px 17px;
 }
 
-.routers tr:hover {
-	background: #999
+#routers {
+	margin: 0 auto;
 }
-  </style>
+
+#routers button.tiny {
+	margin-bottom: 0;
+	padding: 5px 10px;
+}
+
+#left {
+	left: 0px;
+	position: absolute;
+}
+
+#right {
+	left: 400px;
+	position: absolute;
+}
+</style>
 </head>
 <body>
-	<a href="trains"><locale:message code="trains.trains" /></a>
-	<a href="stations"><locale:message code="trains.stations" /></a>
-	<a href="order"><locale:message code="trains.orders" /></a>
-	<a href="orderlist"><locale:message code="trains.allOrders" /></a>
-	
+	<a href="trains" class="btn btn-info btn-xs"><locale:message
+			code="trains.trains" /></a>
+	<a href="stations" class="btn btn-info btn-xs"><locale:message
+			code="trains.stations" /></a>
+	<a href="order" class="btn btn-info btn-xs"><locale:message
+			code="trains.orders" /></a>
+	<a href="orderlist" class="btn btn-info btn-xs"><locale:message
+			code="trains.allOrders" /></a>
+
 	<center>
-		<h1><locale:message code="routes.routes" /></h1>
+		<h1>
+			<locale:message code="trains.route" />
+		</h1>
 	</center>
 	<br>
-	<h3><locale:message code="trains.train" /> <locale:message code="numer" /> ${train.numer}
-		${train.firstStation}-${train.lastStation} <locale:message code="trains.timeStart" />${train.time}</h3>
-	<br>
-	<p><locale:message code="routes.stops" /></p>
-	<table class="routers">
-		
-			<tr>
-				<th><locale:message code="numer" /></th>
-				<th><locale:message code="stations.station" /></th>
-				<th><locale:message code="trains.timeStart" /></th>
-				<th><locale:message code="routers.timeStop" /></th>
-				<th><locale:message code="routers.price" /></th>
-			</tr>
-		
-		<c:forEach items="${routeStations}" var="stations" varStatus="loop">
-			<tr>
-				<td>${loop.index+1}.</td>
-				<td>${stations.station.nameStation}</td>
-				<td>${stations.timeArrival}</td>
-				<td>${stations.timeDeparture}</td>
-				<td>${stations.price}руб.</td>
-				<td><a href="delRoute?id=${stations.id}"><locale:message code="delete" /></a></td>
-				<td></td>
-			</tr>
-		</c:forEach>
+	<h3>
+		<locale:message code="trains.trains" />
+		<locale:message code="numer" />
+		${train.numer} ${train.firstStation}-${train.lastStation}
+		<locale:message code="trains.timeStart" />
+		${train.time}
+	</h3>
+	
+	<locale:message code="routes.stops" />
+	<div id="left" ng-app="">
+		<form action="addrouteTrain" method="get" id="dialog"
+			title="<locale:message code="trains.route"/>">
 
-	</table>
-	<br>
-	<br>
-	<form action="addrouteTrain">
-		<select name="stationId">
-			<c:forEach items="${stationList}" var="station">
+			<div class="row">
+				<div class="small-5 columns">
+					<label class="right inline"><locale:message
+							code="stations.station" /> </label>
+				</div>
+				<div class="small-7 columns">
+					<select name="stationId" id="station">
+						<c:forEach items="${stationList}" var="station">
+							<option value="${station.id}">${station.nameStation}</option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
 
-				<option value="${station.id}">${station.nameStation}</option>
+			<div class="row">
+				<div class="small-5 columns">
+					<label class="right inline"><locale:message
+							code="trains.timeStart" /></label>
+				</div>
+				<div class="small-7 columns">
+					<input type="time" name="timeArrival" id="tstart"
+						placeholder=<locale:message code="trains.timeStart" />>
+				</div>
+			</div>
 
-			</c:forEach>
-		</select> <input type="time" name="timeArrival" placeholder=<locale:message code="trains.timeStart" />>
-		<input type="time" name="timeDeparture" placeholder=<locale:message code="routers.timeStop" />>
-		<input type="numer" name="price" placeholder=<locale:message code="routers.price" />>
-		<input type="hidden" name="trainId" value="${train.id}"> <input
-			type="submit" value=<locale:message code="insert" />>
+			<div class="row">
+				<div class="small-5 columns">
+					<label class="right inline"><locale:message
+							code="routers.timeStop" /></label>
+				</div>
+				<div class="small-7 columns">
+					<input type="time" name="timeDeparture" id="tstop"
+						placeholder=<locale:message code="routers.timeStop" />>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="small-5 columns">
+					<label class="right inline"><locale:message
+							code="routers.price" /></label>
+				</div>
+				<div class="small-7 columns">
+					<input type="text" name="price" id="price"
+						placeholder=<locale:message code="routers.price" />>
+				</div>
+			</div>
+			<center>
+				<button id="show" class="btn btn-success" type="send">
+					<locale:message code="insert" />
+					<span class="glyphicon glyphicon-save"></span>
+				</button>
+				<input type="hidden" name="trainId" value="${train.id}">
+	</div>
 	</form>
-	<br>
+	</div>
+	<div id="right">
+		<table id="routers">
+			<thead>
+				<tr>
+					<th><locale:message code="numer" /></th>
+					<th><locale:message code="stations.station" /></th>
+					<th><locale:message code="trains.timeStart" /></th>
+					<th><locale:message code="routers.timeStop" /></th>
+					<th><locale:message code="routers.price" /></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${routeStations}" var="stations" varStatus="loop">
+					<tr>
+						<td>${loop.index+1}.</td>
+						<td>${stations.station.nameStation}</td>
+						<td>${stations.timeArrival}</td>
+						<td>${stations.timeDeparture}</td>
+						<td>${stations.price}$</td>
+						<td><a href="delRoute?id=${stations.id}"
+							class="btn btn-danger btn-xs"><locale:message code="delete" /><span
+								class="glyphicon glyphicon-trash"></span></a></td>
+
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

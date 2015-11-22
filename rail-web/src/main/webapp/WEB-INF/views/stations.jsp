@@ -9,57 +9,108 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Железнодорожные станции</title>
- <style>
-	table, th, td
-{
-border-style:solid;
-border-width:1px;
-border-collapse:collapse;
-padding:2px;
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
+
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<style>
+form {
+	max-width: 500px;
+	margin: 0 auto;
+	padding-top: 20px;
 }
-th
-{
-height:28px;
-background-color:#f892dc;
-color:black;
-border-color:black;
+
+form button.small {
+	padding: 8px 17px;
 }
-.stations tr:nth-child(odd) {background: #ffffff}
-.stations tr:nth-child(even) {background: #ffeffb}
-.stations tr:hover {background: #999}
-  </style>
+
+#stations {
+	margin: 0 auto;
+}
+
+#stations button.tiny {
+	margin-bottom: 0;
+	padding: 5px 10px;
+}
+#left {
+	left: 0px;
+	position: absolute;
+}
+
+#right {
+	left: 400px;
+	position: absolute;
+	
+}
+</style>
+
 </head>
 <body>
-	<a href="trains"><locale:message code="trains.trains" /></a>
-	<a href="stations"><locale:message code="trains.stations" /></a>
-	<a href="order"><locale:message code="trains.orders" /></a>
-	<a href="orderlist"><locale:message code="trains.allOrders" /></a>
-	
+	<a href="trains" class="btn btn-info btn-xs"><locale:message
+			code="trains.trains" /></a>
+	<a href="stations" class="btn btn-info btn-xs"><locale:message
+			code="trains.stations" /></a>
+	<a href="order" class="btn btn-info btn-xs"><locale:message
+			code="trains.orders" /></a>
+	<a href="orderlist" class="btn btn-info btn-xs"><locale:message
+			code="trains.allOrders" /></a>
+
 	<center>
-		<h1><locale:message code="stations.stations" /></h1>
+		<h1>
+			<locale:message code="stations.stations" />
+		</h1>
 	</center>
-	<form action="addStation" method="get">
-		<input type="text" name="namestation" placeholder=<locale:message code="stations.nameStation" /> /><br>
-		<input type="submit" value=<locale:message code="insert" /> /><br>
+	<div id="left" ng-app="">
+	<form action="addStation" method="get" id="dialog"
+		title="<locale:message code="stations.dialoginsert"/>">
+
+		<div class="row">
+			<div class="small-5 columns">
+				<label class="right inline"><locale:message
+						code="stations.nameStation" /></label>
+			</div>
+			<div class="small-7 columns">
+				<input id="nameStation" type="text" name="namestation"
+					placeholder=<locale:message code="stations.nameStation"/> />
+			</div>
+		</div>
+		<button id="show" class="btn btn-success" type="send">
+			<locale:message code="stations.dialoginsert" />
+			<span class="glyphicon glyphicon-save"></span>
+		</button>
 	</form>
-	<table class="stations">
-		
+	</div>
+	<br>
+	<div id="right">
+	<table id="stations">
+		<thead>
 			<tr>
 				<th><locale:message code="numer" /></th>
 				<th><locale:message code="stations.nameStation" /></th>
-
+				<th></th>
 			</tr>
-		
+		</thead>
 
-		<c:forEach items="${stList}" var="station" varStatus="loop">
-
-			<tr>
-				<td>${loop.index+1}.</td>
-				<td>${station.nameStation}</td>
-				<td><a href="delStation?id=${station.id}"><locale:message code="delete" /></a></td>
-			</tr>
-		</c:forEach>
-
+		<tbody>
+			<c:forEach items="${stList}" var="station" varStatus="loop">
+				<tr>
+					<td>${loop.index+1}.</td>
+					<td>${station.nameStation}</td>
+					<td><a href="delStation?id=${station.id}"
+						class="btn btn-danger btn-xs"><locale:message code="delete" /><span
+							class="glyphicon glyphicon-trash"></span></a></td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
+	</div>
 </body>
 </html>
